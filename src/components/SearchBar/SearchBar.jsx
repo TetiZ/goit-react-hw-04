@@ -1,16 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const searchSchema = Yup.object().shape({
-  query: Yup.string()
-    .min(1, "too short")
-    .max(50, "too long")
-    .required("required"),
+  query: Yup.string().required("Required field"),
 });
 
 const notify = () => {
-  toast.error("Please type your query");
+  toast.error("Please type your search query");
 };
 
 export default function SearchBar({ onSearch }) {
@@ -20,7 +17,7 @@ export default function SearchBar({ onSearch }) {
         initialValues={{ query: "" }}
         onSubmit={(values, action) => {
           onSearch(values.query);
-          values.query.trim() === "" && notify();
+          values.query === "" && notify();
           action.resetForm();
         }}
         validationSchema={searchSchema}
