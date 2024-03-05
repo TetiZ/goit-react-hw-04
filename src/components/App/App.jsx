@@ -5,6 +5,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Modal from "react-modal";
 import ImageModal from "../ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
+import Loader from "../Loader/Loader";
 
 export const App = () => {
   const [img, setImg] = useState([]);
@@ -65,7 +66,7 @@ export const App = () => {
       {img.length > 0 && (
         <ImageGallery items={img} onOpenModal={handleOpenModal} />
       )}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
       {error && <p>Error occurred while fetching images.</p>}
       {img.length > 0 && !isLoading && (
         <button onClick={handleLoadMoreBtn}>Load More</button>

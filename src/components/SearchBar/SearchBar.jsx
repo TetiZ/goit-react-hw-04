@@ -32,7 +32,6 @@ export default function SearchBar({ onSearch }) {
           <ErrorMessage name="query" component="div"></ErrorMessage>
 
           <button type="submit">Search</button>
-          <Toaster />
         </Form>
       </Formik>
     </header>
