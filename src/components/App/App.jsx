@@ -1,4 +1,3 @@
-import css from "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { useState, useEffect, useRef } from "react";
 import { fetchImg } from "../../img-api";
@@ -8,6 +7,7 @@ import ImageModal from "../ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import modal from "../../components/ImageModal/ImageModal.module.css";
 
 export const App = () => {
   const [img, setImg] = useState([]);
@@ -64,7 +64,7 @@ export const App = () => {
   };
 
   return (
-    <div className={css.bg}>
+    <div>
       <SearchBar onSearch={handleSearch} />
       {img.length > 0 && (
         <ImageGallery
@@ -78,10 +78,15 @@ export const App = () => {
       {img.length > 0 && !isLoading && (
         <LoadMoreBtn onClick={handleLoadMoreBtn} />
       )}
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <Modal
+        className={modal.content}
+        overlayClassName={modal.overlay}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+      >
         <ImageModal content={modalContent} />
       </Modal>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
     </div>
   );
 };
