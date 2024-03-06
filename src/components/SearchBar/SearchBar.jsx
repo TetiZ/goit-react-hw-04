@@ -1,13 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import toast from "react-hot-toast";
-
-const searchSchema = Yup.object().shape({
-  query: Yup.string().required("Required field"),
-});
+import css from "./SearchBar.module.css";
+import { CiSearch } from "react-icons/ci";
 
 const notify = () => {
   toast.error("Please type your search query");
+  return;
 };
 
 export default function SearchBar({ onSearch }) {
@@ -16,22 +14,26 @@ export default function SearchBar({ onSearch }) {
       <Formik
         initialValues={{ query: "" }}
         onSubmit={(values, action) => {
-          onSearch(values.query);
           values.query === "" && notify();
+          onSearch(values.query);
           action.resetForm();
         }}
-        validationSchema={searchSchema}
       >
-        <Form>
-          <Field
-            name="query"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          ></Field>
-          <ErrorMessage name="query" component="div"></ErrorMessage>
+        <Form className={css.form}>
+          <div className={css.inputWrapper}>
+            <Field
+              className={css.input}
+              name="query"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+            ></Field>
+            <button className="btn" type="submit">
+              <CiSearch />
+            </button>
+          </div>
 
-          <button type="submit">Search</button>
+          <ErrorMessage name="query" component="div"></ErrorMessage>
         </Form>
       </Formik>
     </header>

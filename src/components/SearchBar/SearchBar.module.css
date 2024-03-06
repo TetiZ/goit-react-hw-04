@@ -1,0 +1,21 @@
+.form {
+  margin: 0 auto;
+  background-color: #c1feed;
+}
+
+.inputWrapper {
+  display: flex;
+  position: relative;
+}
+
+.input {
+  padding-left: 30px;
+}
+
+.btn {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background-color: transparent;
+  border: none;
+}
