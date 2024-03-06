@@ -10,7 +10,7 @@ const notify = () => {
 
 export default function SearchBar({ onSearch }) {
   return (
-    <header>
+    <header className={css.header}>
       <Formik
         initialValues={{ query: "" }}
         onSubmit={(values, action) => {
@@ -28,8 +28,8 @@ export default function SearchBar({ onSearch }) {
               autoFocus
               placeholder="Search images and photos"
             ></Field>
-            <button className="btn" type="submit">
-              <CiSearch />
+            <button className={css.btn} type="submit">
+              <CiSearch className={css.icon} />
             </button>
           </div>
 

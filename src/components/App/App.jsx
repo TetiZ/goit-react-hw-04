@@ -1,11 +1,13 @@
+import css from "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchImg } from "../../img-api";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Modal from "react-modal";
 import ImageModal from "../ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
 import Loader from "../Loader/Loader";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 
 export const App = () => {
   const [img, setImg] = useState([]);
@@ -15,6 +17,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState({});
+  const galleryRef = useRef();
 
   Modal.setAppElement("#root");
 
@@ -61,20 +64,24 @@ export const App = () => {
   };
 
   return (
-    <>
+    <div className={css.bg}>
       <SearchBar onSearch={handleSearch} />
       {img.length > 0 && (
-        <ImageGallery items={img} onOpenModal={handleOpenModal} />
+        <ImageGallery
+          ref={galleryRef}
+          items={img}
+          onOpenModal={handleOpenModal}
+        />
       )}
       {isLoading && <Loader />}
       {error && <p>Error occurred while fetching images.</p>}
       {img.length > 0 && !isLoading && (
-        <button onClick={handleLoadMoreBtn}>Load More</button>
+        <LoadMoreBtn onClick={handleLoadMoreBtn} />
       )}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <ImageModal content={modalContent} />
       </Modal>
       <Toaster position="top-right" />
-    </>
+    </div>
   );
 };
