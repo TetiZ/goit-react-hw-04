@@ -36,7 +36,7 @@ export default function ImageModal({
             rel="noopener noreferrer"
           >
             <LiaHandPointer className={css.icon} />
-            Оригінальне зображення, готове до завантаження
+            Raw image, ready to download
           </a>
         </div>
       </>
