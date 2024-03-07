@@ -17,6 +17,10 @@
   height: 20px;
 }
 
+.img {
+  height: 90%;
+}
+
 .content {
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
