@@ -2,12 +2,10 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useState, useEffect, useRef } from "react";
 import { fetchImg } from "../../img-api";
 import ImageGallery from "../ImageGallery/ImageGallery";
-import Modal from "react-modal";
 import ImageModal from "../ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
 import Loader from "../Loader/Loader";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
-import modal from "../../components/ImageModal/ImageModal.module.css";
 
 export const App = () => {
   const [img, setImg] = useState([]);
@@ -18,8 +16,6 @@ export const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const galleryRef = useRef();
-
-  Modal.setAppElement("#root");
 
   useEffect(() => {
     if (!query) {
@@ -59,7 +55,7 @@ export const App = () => {
     setModalContent(value);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalIsOpen(false);
   };
 
@@ -78,14 +74,11 @@ export const App = () => {
       {img.length > 0 && !isLoading && (
         <LoadMoreBtn onClick={handleLoadMoreBtn} />
       )}
-      <Modal
-        className={modal.content}
-        overlayClassName={modal.overlay}
+      <ImageModal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-      >
-        <ImageModal content={modalContent} />
-      </Modal>
+        onClose={handleCloseModal}
+        content={modalContent}
+      />
       <Toaster position="top-center" />
     </div>
   );
