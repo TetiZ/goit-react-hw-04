@@ -74,11 +74,13 @@ export const App = () => {
       {img.length > 0 && !isLoading && (
         <LoadMoreBtn onClick={handleLoadMoreBtn} />
       )}
-      <ImageModal
-        isOpen={modalIsOpen}
-        onClose={handleCloseModal}
-        content={modalContent}
-      />
+      {Object.keys(modalContent).length !== 0 && (
+        <ImageModal
+          isOpen={modalIsOpen}
+          onClose={handleCloseModal}
+          content={modalContent}
+        />
+      )}
       <Toaster position="top-center" />
     </div>
   );
