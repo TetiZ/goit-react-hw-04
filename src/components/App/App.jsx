@@ -28,10 +28,10 @@ export const App = () => {
 
     async function getGallery() {
       try {
-        const data = await fetchImg(query, page);
-        setImg((prevImg) => [...prevImg, ...data]);
         setIsLoading(true);
         setError(false);
+        const data = await fetchImg(query, page);
+        setImg((prevImg) => [...prevImg, ...data]);
       } catch (e) {
         setError(true);
       } finally {
@@ -51,7 +51,7 @@ export const App = () => {
   };
 
   const handleLoadMoreBtn = () => {
-    setPage(page + 1);
+    setPage((page) => page + 1);
   };
 
   const handleOpenModal = (value) => {
