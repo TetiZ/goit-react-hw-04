@@ -16,6 +16,7 @@ export const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const galleryRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (!query) {
@@ -28,6 +29,7 @@ export const App = () => {
         setError(false);
         const data = await fetchImg(query, page);
         setImg((prevImg) => [...prevImg, ...data]);
+        setIsVisible(data.length > 0);
       } catch (e) {
         setError(true);
       } finally {
@@ -71,7 +73,7 @@ export const App = () => {
       )}
       {isLoading && <Loader />}
       {error && <p>Error occurred while fetching images.</p>}
-      {img.length > 0 && !isLoading && (
+      {img.length > 0 && !isLoading && isVisible && (
         <LoadMoreBtn onClick={handleLoadMoreBtn} />
       )}
       {Object.keys(modalContent).length !== 0 && (
